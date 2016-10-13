@@ -1,0 +1,23 @@
+{
+  "name": "xlsx2json",
+  "version": "0.0.1",
+  "description": "Xlxs to json",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Enigma Marketing",
+    "email": "admin@enigma-marketing.co.uk",
+    "url": "http://www.enigma-marketing.co.uk"
+  },
+  "licenses": [
+    {
+      "type": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "dependencies": {
+    "node-xlsx": "^0.6.0"
+  }
+}
