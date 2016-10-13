@@ -34,7 +34,7 @@ module.exports = function (filePath) {
             if (!col) { break; }
             
             col = col + '';
-            col = col.trim().toLowerCase();
+            col = col.trim();
             
             colTrans.push({
                 name: col,
