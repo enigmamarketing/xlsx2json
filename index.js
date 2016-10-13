@@ -30,10 +30,11 @@ module.exports = function (filePath) {
         
         for (i = 1; i < data[0].length; i += 1) {
             col = data[0][i];
+            
+            if (!col) { break; }
+            
             col = col + '';
             col = col.trim().toLowerCase();
-            
-            if (col.length === 0) { break; }
             
             colTrans.push({
                 name: col,
