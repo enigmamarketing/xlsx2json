@@ -5,9 +5,7 @@ var xlsx = require('node-xlsx');
 
 
 module.exports = function (filePath) {
-    // get POST data
-
-    var startRow = 0,
+    var startRow = null,
         colId = 0,
         obj = xlsx.parse(filePath),
         line = 0,
@@ -27,6 +25,16 @@ module.exports = function (filePath) {
             }
             addition = addition[split.toLowerCase()];
         });
+        
+        for (i = 0; i < data.length; i += 1) {
+            if (data[i][0] === '{build-doc}') {
+                startRow = i + 1;
+                break;
+            }
+        }
+        if (startRow === null) {
+            throw new Error('Unable to find start of build document!');
+        }
         
         for (i = 1; i < data[0].length; i += 1) {
             col = data[0][i];
@@ -51,7 +59,7 @@ module.exports = function (filePath) {
                     colAddition,
                     colFinal,
                     colLevel = 0;
-                line = 0;
+                
                 if (line >= startRow && row[colId]) {
                     colName = row[colId].split('.');
                     array = row[colId].match(/\[(.*?)\]/);
