@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.0.5 - 0.0.6
+## 0.0.5 - 0.0.7
 
  * Parser now looks for {build-doc} in the first column to mark the beginning of the build document.
 
