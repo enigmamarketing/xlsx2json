@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.5 - 0.0.6
+
+ * Parser now looks for {build-doc} in the first column to mark the beginning of the build document.
+
 ## 0.0.4 - 0.0.5
 
  * Don't lowercase languages, as they are case sensitive.
