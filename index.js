@@ -36,8 +36,8 @@ module.exports = function (filePath) {
             throw new Error('Unable to find start of build document!');
         }
 
-        for (i = 1; i < data[0].length; i += 1) {
-            col = data[0][i];
+        for (i = 1; i < data[startRow - 1].length; i += 1) {
+            col = data[startRow - 1][i];
 
             if (!col) { break; }
 
