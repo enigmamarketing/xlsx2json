@@ -1,5 +1,5 @@
 {
-  "name": "xlsx2json",
+  "name": "build-doc-parse",
   "version": "0.0.1",
   "description": "Xlxs to json",
   "main": "index.js",
