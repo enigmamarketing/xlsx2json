@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.4 - 0.0.5
+
+ * Don't lowercase languages, as they are case sensitive.
+ * Don't lowercase property names, as they are case sensitive.
+
 ## 0.0.3 - 0.0.4
 
  * dont add columns after blank line
