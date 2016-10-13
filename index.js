@@ -65,13 +65,13 @@ module.exports = function (filePath) {
                         colAddition = columnJson;
                         colName.forEach(function (split) {
 
-                            if(!colAddition[split.toLowerCase()]) {
-                                colAddition[split.toLowerCase()] = {};
+                            if(!colAddition[split]) {
+                                colAddition[split] = {};
                             }
                             if (colLevel === (colName.length - 1)) {
-                                colFinal = split.toLowerCase();
+                                colFinal = split;
                             } else {
-                                colAddition = colAddition[split.toLowerCase()];
+                                colAddition = colAddition[split];
                             }
                             colLevel += 1;
                         });
