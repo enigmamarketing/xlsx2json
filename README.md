@@ -1,6 +1,6 @@
 # XLXS2JSON
 
-_Version 0.0.5_
+_Version 0.0.6_
 
 
 # License and Credits
