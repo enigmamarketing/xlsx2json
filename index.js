@@ -22,8 +22,9 @@ module.exports = function (filePath) {
 
         addition = json;
         sheetSplit.forEach(function (split) {
-            addition[split.toLowerCase()] = {};
-
+            if(!addition[split.toLowerCase()]) {
+                addition[split.toLowerCase()] = {};
+            }
             addition = addition[split.toLowerCase()];
         });
 
@@ -41,9 +42,14 @@ module.exports = function (filePath) {
             var columnJson = {};
 
             data.forEach(function (row) {
-                var array = '';
+                var array = '',
+                    colName,
+                    colAddition,
+                    colFinal,
+                    colLevel = 0;
                 line = 0;
                 if (line >= startRow && row[colId]) {
+                    colName = row[colId].split('.');
                     array = row[colId].match(/\[(.*?)\]/);
                     if (array) {
                         if (!columnJson.hasOwnProperty(array.input.replace(array[0], ''))) {
@@ -51,7 +57,21 @@ module.exports = function (filePath) {
                         }
                         columnJson[array.input.replace(array[0], '')][array[1]] = row[column.column];
                     } else {
-                        columnJson[row[colId]] = row[column.column];
+
+                        colAddition = columnJson;
+                        colName.forEach(function (split) {
+
+                            if(!colAddition[split.toLowerCase()]) {
+                                colAddition[split.toLowerCase()] = {};
+                            }
+                            if (colLevel === (colName.length - 1)) {
+                                colFinal = split.toLowerCase();
+                            } else {
+                                colAddition = colAddition[split.toLowerCase()];
+                            }
+                            colLevel += 1;
+                        });
+                        colAddition[colFinal] = row[column.column];
                     }
                 }
                 line += 1;
