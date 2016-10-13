@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.0.3
+
+ * dont add columns after blank line
 
 ## 0.0.2
 
