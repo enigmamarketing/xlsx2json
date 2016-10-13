@@ -14,7 +14,7 @@ module.exports = function (filePath) {
         json = [];
 
     obj.forEach(function (worksheet) {
-        var i = 0,
+        var i = 0, col,
             colTrans = [],
             data = worksheet.data,
             sheetSplit = worksheet.name.split('.'),
@@ -27,16 +27,19 @@ module.exports = function (filePath) {
             }
             addition = addition[split.toLowerCase()];
         });
-
-        data[0].forEach(function (col) {
-            if (i > 0) {
-                colTrans.push({
-                    name: col,
-                    column: i
-                });
-            }
-            i++;
-        });
+        
+        for (i = 1; i < data[0].length; i += 1) {
+            col = data[0][i];
+            col = col + '';
+            col = col.trim().toLowerCase();
+            
+            if (col.length === 0) { break; }
+            
+            colTrans.push({
+                name: col,
+                column: i
+            });
+        }
 
         colTrans.forEach(function (column) {
             var columnJson = {};
@@ -77,7 +80,7 @@ module.exports = function (filePath) {
                 line += 1;
             });
 
-            addition[column.name.toLowerCase()] = columnJson;
+            addition[column.name] = columnJson;
         });
     });
     return json;
