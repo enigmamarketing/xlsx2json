@@ -1,6 +1,6 @@
 {
   "name": "build-doc-parse",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Xlxs to json",
   "main": "index.js",
   "scripts": {

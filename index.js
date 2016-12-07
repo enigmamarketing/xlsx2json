@@ -19,11 +19,11 @@ module.exports = function (filePath) {
             addition;
 
         addition = json;
-        sheetSplit.forEach(function (split) {
-            if(!addition[split.toLowerCase()]) {
-                addition[split.toLowerCase()] = {};
+        sheetSplit.forEach(function (sheetComponent) {
+            if(!addition.hasOwnProperty(sheetComponent)) {
+                addition[sheetComponent] = {};
             }
-            addition = addition[split.toLowerCase()];
+            addition = addition[sheetComponent];
         });
 
         for (i = 0; i < data.length; i += 1) {
