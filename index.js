@@ -58,8 +58,7 @@ module.exports = function (filePath) {
                 var array = '',
                     colName,
                     colAddition,
-                    colFinal,
-                    colLevel = 0;
+                    colFinal;
 
                 if (line >= startRow && row[colId]) {
                     colName = row[colId].split('.');
@@ -68,23 +67,21 @@ module.exports = function (filePath) {
                         if (!columnJson.hasOwnProperty(array.input.replace(array[0], ''))) {
                             columnJson[array.input.replace(array[0], '')] = {};
                         }
-                        columnJson[array.input.replace(array[0], '')][array[1]] = row[column.column];
+                        columnJson[array.input.replace(array[0], '')][array[1]] = new Object(row[column.column]);
                     } else {
-
                         colAddition = columnJson;
-                        colName.forEach(function (split) {
-
-                            if(!colAddition[split]) {
+                        colName.forEach(function (split, i) {
+                            if(!colAddition.hasOwnProperty(split)) {
                                 colAddition[split] = {};
                             }
-                            if (colLevel === (colName.length - 1)) {
+
+                            if (i >= colName.length - 1) {
                                 colFinal = split;
                             } else {
                                 colAddition = colAddition[split];
                             }
-                            colLevel += 1;
                         });
-                        colAddition[colFinal] = row[column.column];
+                        colAddition[colFinal] = new Object(row[column.column]);
                     }
                 }
                 line += 1;
