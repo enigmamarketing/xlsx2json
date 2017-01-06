@@ -1,7 +1,8 @@
 /*jslint node:true, unparam:true, nomen:true, regexp:true*/
 'use strict';
 
-var xlsx = require('node-xlsx');
+var xlsx = require('node-xlsx'),
+    DataObjectParser = require('dataobject-parser');
 
 
 module.exports = function (filePath) {
@@ -51,43 +52,15 @@ module.exports = function (filePath) {
         }
 
         colTrans.forEach(function (column) {
-            var columnJson = {},
-                line = 0;
+            var columnJson = new DataObjectParser();
 
-            data.forEach(function (row) {
-                var array = '',
-                    colName,
-                    colAddition,
-                    colFinal;
-
-                if (line >= startRow && row[colId]) {
-                    colName = row[colId].split('.');
-                    array = row[colId].match(/\[(.*?)\]/);
-                    if (array) {
-                        if (!columnJson.hasOwnProperty(array.input.replace(array[0], ''))) {
-                            columnJson[array.input.replace(array[0], '')] = {};
-                        }
-                        columnJson[array.input.replace(array[0], '')][array[1]] = new Object(row[column.column]);
-                    } else {
-                        colAddition = columnJson;
-                        colName.forEach(function (split, i) {
-                            if(!colAddition.hasOwnProperty(split)) {
-                                colAddition[split] = {};
-                            }
-
-                            if (i >= colName.length - 1) {
-                                colFinal = split;
-                            } else {
-                                colAddition = colAddition[split];
-                            }
-                        });
-                        colAddition[colFinal] = new Object(row[column.column]);
-                    }
+            data.forEach(function (row, i) {
+                if (i >= startRow && row[colId]) {
+                    columnJson.set(row[colId], new Object(row[column.column]));
                 }
-                line += 1;
             });
 
-            addition[column.name] = columnJson;
+            addition[column.name] = columnJson.data();
         });
     });
     return json;
